@@ -5,4 +5,4 @@ matplotlib==3.4.3
 plotly==5.18.0
 Pillow==10.1.0
 qiskit-aer==0.13.0
-pylatexenc==2.10
+pylatexenc==3.0a13
