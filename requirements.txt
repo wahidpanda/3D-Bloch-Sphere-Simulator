@@ -4,3 +4,4 @@ numpy==1.26.1
 matplotlib==3.4.3
 plotly==5.18.0
 Pillow==10.1.0
+qiskit-aer 0.13.0
