@@ -14,12 +14,11 @@ st.write("Follow me on GitHub: [https://github.com/wahidpanda](https://github.co
 # Quantum circuit to visualize Bloch vector
 qc = QuantumCircuit(1)
 
-# User input for quantum gates
+
 st.sidebar.subheader("Quantum Gate")
 
 gate = st.sidebar.selectbox("Select Quantum Gate", ["I", "X", "Y", "Z", "H", "S", "T"])
 
-# Define gate descriptions
 gate_descriptions = {
     "I": "Identity Gate (No change):\n"
           "The Identity gate, denoted as I, does not alter the state of the qubit. "
@@ -57,28 +56,26 @@ elif gate == "S":
 elif gate == "T":
     qc.t(0)
 
-# Simulate the quantum circuit
 backend = Aer.get_backend('statevector_simulator')
 job = execute(qc, backend)
 result = job.result()
 state_vector = result.get_statevector()
 
-# Bloch vector components
+
 x = np.real(state_vector[0])
 y = np.real(state_vector[1])
-z = 0  # The z-component is always 0 for a single-qubit Bloch vector
+z = 0 
 
-# Create Bloch sphere plot
 bloch_fig = go.Figure()
 
 
-# Add Bloch vector
+
 bloch_fig.add_trace(
     go.Scatter3d(x=[0, x], y=[0, y], z=[0, z], mode='lines+markers', marker=dict(size=10, color='red'),
                   line=dict(width=5), name="Bloch Vector")
 )
 
-# Add Bloch sphere
+
 u = np.linspace(0, 2 * np.pi, 100)
 v = np.linspace(0, np.pi, 100)
 radius = 1.5  # Increase the radius for a larger sphere
@@ -96,7 +93,6 @@ bloch_fig.update_layout(scene=dict(
 
 st.plotly_chart(bloch_fig, use_container_width=True)
 
-# Display gate description and circuit diagram
 st.subheader("Gate Description")
 if gate in gate_descriptions:
     st.write(gate_descriptions[gate])
@@ -117,21 +113,13 @@ elif gate == "S":
 elif gate == "T":
     circuit.t(0)
 
-# Generate the circuit diagram image with a transparent background
-# Generate the circuit diagram image with a transparent background
-# Generate the circuit diagram image with a transparent background using the "clifford" style
 image = io.BytesIO()
 fig, ax = plt.subplots(figsize=(6, 3), dpi=100)
 circuit_drawer(circuit, output='mpl', style='clifford', ax=ax)
 ax.patch.set_facecolor('none')  # Set the background color to transparent
 fig.savefig(image, format='png', bbox_inches='tight', transparent=True)
 st.image(image, use_column_width=True)
-
-
-
 st.sidebar.subheader("Bloch Vector")
-
-# Display Bloch vector coordinates
 st.sidebar.write(f"x: {x}")
 st.sidebar.write(f"y: {y}")
 st.sidebar.write(f"z: {z}")
