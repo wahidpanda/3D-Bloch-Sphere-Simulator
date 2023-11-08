@@ -8,7 +8,6 @@ import io
 import plotly.graph_objects as go
 from PIL import Image
 
-
 st.title("3D Bloch Sphere Simulator 🎲")
 st.write("Follow me on GitHub: [https://github.com/wahidpanda](https://github.com/wahidpanda)")
 
@@ -119,12 +118,16 @@ elif gate == "T":
     circuit.t(0)
 
 # Generate the circuit diagram image with a transparent background
+# Generate the circuit diagram image with a transparent background
+# Generate the circuit diagram image with a transparent background using the "clifford" style
 image = io.BytesIO()
 fig, ax = plt.subplots(figsize=(6, 3), dpi=100)
-circuit_drawer(circuit, output='mpl', style={'cregbundle': True}, ax=ax)
+circuit_drawer(circuit, output='mpl', style='clifford', ax=ax)
 ax.patch.set_facecolor('none')  # Set the background color to transparent
 fig.savefig(image, format='png', bbox_inches='tight', transparent=True)
 st.image(image, use_column_width=True)
+
+
 
 st.sidebar.subheader("Bloch Vector")
 
