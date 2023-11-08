@@ -8,6 +8,7 @@ import io
 import plotly.graph_objects as go
 from PIL import Image
 
+
 st.title("3D Bloch Sphere Simulator 🎲")
 st.write("Follow me on GitHub: [https://github.com/wahidpanda](https://github.com/wahidpanda)")
 
